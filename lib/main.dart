@@ -1,5 +1,5 @@
 import 'constants/theme.dart';
-import 'ui/screens/splash_screen.dart';
+import 'ui/screens/splash/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 

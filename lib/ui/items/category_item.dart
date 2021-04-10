@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
-  const CategoryItem({
-    Key key,
-    @required this.category,
-  }) : super(key: key);
+  final Function onTap;
+  const CategoryItem({Key key, @required this.category, @required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class CategoryItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             padding: const EdgeInsets.only(
               right: 10,

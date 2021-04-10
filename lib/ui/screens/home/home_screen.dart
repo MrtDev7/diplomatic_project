@@ -3,9 +3,11 @@ import 'package:diplomatic/models/category_model.dart';
 import 'package:diplomatic/ui/items/category_item.dart';
 import 'package:diplomatic/ui/screens/home/widgets/app_bar.dart';
 import 'package:diplomatic/ui/screens/home/widgets/app_drawer.dart';
+import 'package:diplomatic/ui/screens/posts/posts_screen.dart';
 import 'package:diplomatic/ui/widgets/slider_header.dart';
 import 'package:diplomatic/ui/widgets/sliders/main_slider.dart';
 import 'package:diplomatic/ui/widgets/sliders/posts_slider.dart';
+import 'package:diplomatic/utils/helpers/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +32,24 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               MainSlider(posts: mainSliderData),
-              renderSliderHeader('Upcoming Events'),
-              PostsSlider(posts: mainSliderData),
+              renderSliderHeader(
+                  title: 'Upcoming Events',
+                  onMoreClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PostsScreen(
+                              posts: upComingEvents, title: 'Upcoming Events');
+                        },
+                      ),
+                    );
+                  }),
+              PostsSlider(posts: upComingEvents),
 
-              //
-
-              renderSliderHeader('Academy Platform'),
+              SizedBox(
+                height: 25,
+              ),
               CategoryItem(
                 category: Category(
                   imageUrl:
@@ -43,8 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'Membership Request',
                   url: '',
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PostsScreen(
+                            posts: memberShip, title: 'Membership Request');
+                      },
+                    ),
+                  );
+                },
               ),
-
               CategoryItem(
                 category: Category(
                   imageUrl:
@@ -52,6 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'Diplomatic academy Platfom',
                   url: '',
                 ),
+                onTap: () {
+                  launchURL('http://journal.diplomatic.ac/');
+                },
               ),
 
               CategoryItem(
@@ -61,6 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'Diplomatic academy Library',
                   url: '',
                 ),
+                onTap: () {
+                  launchURL('http://library.diplomatic.ac/');
+                },
               ),
 
               CategoryItem(
@@ -70,11 +100,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'Diplomatic academy Journal',
                   url: '',
                 ),
+                onTap: () {
+                  launchURL('http://journal.diplomatic.ac/');
+                },
               ),
 
               //
-              renderSliderHeader('Previews Events'),
-              PostsSlider(posts: mainSliderData),
+              renderSliderHeader(
+                title: 'Previews Events',
+                onMoreClicked: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PostsScreen(
+                            posts: previewsEvents, title: 'Previews Events');
+                      },
+                    ),
+                  );
+                },
+              ),
+              PostsSlider(posts: previewsEvents),
             ],
           ),
         ),

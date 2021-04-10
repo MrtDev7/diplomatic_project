@@ -1,7 +1,8 @@
 import 'package:diplomatic/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-Widget renderSliderHeader(String title) {
+Widget renderSliderHeader(
+    {@required String title, @required Function onMoreClicked}) {
   return Container(
     height: 50,
     margin: const EdgeInsets.only(
@@ -30,13 +31,16 @@ Widget renderSliderHeader(String title) {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 15.0),
-          child: Text(
-            ' more ',
-            style: const TextStyle(
-              color: kprimaryColor,
-              fontWeight: FontWeight.w500,
+        GestureDetector(
+          onTap: onMoreClicked,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: Text(
+              ' more ',
+              style: const TextStyle(
+                color: kprimaryColor,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         )

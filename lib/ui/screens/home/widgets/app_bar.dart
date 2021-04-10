@@ -7,6 +7,7 @@ AppBar homeAppBar() {
   return AppBar(
     centerTitle: true,
     backgroundColor: Colors.white,
+    iconTheme: IconThemeData(color: Colors.black),
     actions: [
       IconButton(
         icon: Icon(Icons.share),

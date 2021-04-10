@@ -1,8 +1,15 @@
 import 'package:diplomatic/constants/assets.dart';
 import 'package:diplomatic/constants/colors.dart';
+import 'package:diplomatic/data/fake_data.dart';
 import 'package:diplomatic/ui/items/drawer_item.dart';
+import 'package:diplomatic/ui/screens/events/events_screen.dart';
+import 'package:diplomatic/ui/screens/post/post_screen.dart';
+import 'package:diplomatic/ui/screens/posts/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../configs.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key key}) : super(key: key);
@@ -26,7 +33,16 @@ class AppDrawer extends StatelessWidget {
                 FontAwesomeIcons.solidBuilding,
                 color: kprimaryColor,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PostsScreen(posts: aboutUS, title: 'About US');
+                    },
+                  ),
+                );
+              },
               title: 'Abour US',
             ),
             renderDrawerItem(
@@ -34,7 +50,16 @@ class AppDrawer extends StatelessWidget {
                 FontAwesomeIcons.calendarWeek,
                 color: kprimaryColor,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return EventsScreen();
+                    },
+                  ),
+                );
+              },
               title: 'Events',
             ),
             renderDrawerItem(
@@ -42,7 +67,16 @@ class AppDrawer extends StatelessWidget {
                 FontAwesomeIcons.graduationCap,
                 color: kprimaryColor,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PostScreen(post: researchAndStudiesPost);
+                    },
+                  ),
+                );
+              },
               title: 'Research and Studies',
             ),
             renderDrawerItem(
@@ -50,7 +84,16 @@ class AppDrawer extends StatelessWidget {
                 FontAwesomeIcons.pen,
                 color: kprimaryColor,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PostScreen(post: educationalService);
+                    },
+                  ),
+                );
+              },
               title: 'Educational services',
             ),
             renderDrawerItem(
@@ -58,27 +101,34 @@ class AppDrawer extends StatelessWidget {
                 FontAwesomeIcons.layerGroup,
                 color: kprimaryColor,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PostsScreen(
+                        posts: memberShip,
+                        title: 'Membership Request',
+                      );
+                    },
+                  ),
+                );
+              },
               title: 'Membership Request',
             ),
             renderDrawerItem(
-              onTap: () {},
-              title: 'Partnership request',
-              leading: FaIcon(
-                FontAwesomeIcons.layerGroup,
-                color: kprimaryColor,
-              ),
-            ),
-            renderDrawerItem(
-              onTap: () {},
-              title: 'Diplomatic Platform',
-              leading: FaIcon(
-                FontAwesomeIcons.table,
-                color: kprimaryColor,
-              ),
-            ),
-            renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PostScreen(
+                        post: contactUS,
+                      );
+                    },
+                  ),
+                );
+              },
               title: 'Contact US',
               leading: FaIcon(
                 FontAwesomeIcons.solidAddressBook,
@@ -87,7 +137,9 @@ class AppDrawer extends StatelessWidget {
             ),
             Divider(),
             renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                _launchURL(Configs.facebookUrl);
+              },
               title: 'Facebook',
               leading: FaIcon(
                 FontAwesomeIcons.facebook,
@@ -95,7 +147,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                _launchURL(Configs.youtubeUrl);
+              },
               title: 'youtube',
               leading: FaIcon(
                 FontAwesomeIcons.youtube,
@@ -103,7 +157,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                _launchURL(Configs.twitterUrl);
+              },
               title: 'twitter',
               leading: FaIcon(
                 FontAwesomeIcons.twitter,
@@ -111,7 +167,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                _launchURL(Configs.linkedInUrl);
+              },
               title: 'linkedin',
               leading: FaIcon(
                 FontAwesomeIcons.linkedin,
@@ -119,7 +177,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             renderDrawerItem(
-              onTap: () {},
+              onTap: () {
+                _launchURL(Configs.instagramUrl);
+              },
               title: 'instagram',
               leading: FaIcon(
                 FontAwesomeIcons.instagram,
@@ -132,3 +192,6 @@ class AppDrawer extends StatelessWidget {
     );
   }
 }
+
+void _launchURL(String url) async =>
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';

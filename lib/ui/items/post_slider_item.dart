@@ -1,3 +1,5 @@
+import 'package:diplomatic/ui/screens/post/post_screen.dart';
+
 import '../../models/post.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +60,16 @@ class PostSliderItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return PostScreen(post: post);
+                        },
+                      ),
+                    );
+                  },
                   child: Container(),
                 ),
               ),
