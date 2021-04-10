@@ -1,4 +1,5 @@
-import 'package:diplomatic/views/splash_screen.dart';
+import 'constants/theme.dart';
+import 'ui/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Diplomatic Academy',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: kappTheme(context),
       home: SplashScreen(),
     );
   }

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:diplomatic/views/home_screen.dart';
+import 'package:diplomatic/constants/assets.dart';
 import 'package:flutter/material.dart';
 
-import '../configs.dart';
+import 'home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -23,6 +23,7 @@ class SplashScreenState extends State<SplashScreen>
         duration: const Duration(milliseconds: 1000), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
     controller.forward();
+
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => HomeScreen()));
@@ -33,17 +34,16 @@ class SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Configs.primaryColor,
       body: Center(
         child: FadeTransition(
           opacity: animation,
           child: Container(
-            width: 180,
-            height: 180,
+            width: 200,
+            height: 150,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  'assets/images/logo.png',
+                  secondaryLogo,
                 ),
               ),
             ),
